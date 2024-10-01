@@ -1,0 +1,26 @@
+<div class="container-fluid">
+
+    <div class="row">
+        Menu List
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-4 col-xl-3" *ngFor="let car of carList;">
+            <div class="card">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{car.name}} - {{car.brand}}</h5>
+                    <p class="card-text">
+                        {{car.description}}
+                    </p>
+
+                    <p class="card-text text-center fs-4">R${{car.price}}</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button class="btn app-primary-outline-button">Editar</button>
+                        <button class="btn app-primary-button">Criar Venda</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
