@@ -3,19 +3,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CarCreateUpdate } from '../models/dto/car-create-update';
 import { Car } from '../models/dto/car';
+import { Page } from '../models/dto/page';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
 
-  private apiUrl = 'baseUrl';
+  private apiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
   //TODO Page
-  getAllCars(): Observable<Car[]> {
-    return this.http.get<Car[]>(`${this.apiUrl}/cars`);
+  getAllCars(currentPage: number, size: number,): Observable<Page<Car>> {
+    return this.http.get<Page<Car>>(`${this.apiUrl}/cars?page=${currentPage}&size=${size}`);
   }
 
   getCarById(id: string): Observable<Car> {
@@ -26,6 +27,8 @@ export class CarService {
     const formData: FormData = new FormData();
     formData.append('name', car.name);
     formData.append('brand', car.brand);
+    formData.append('plate', car.plate);
+    formData.append('status', car.status);
     formData.append('description', car.description);
     formData.append('price', car.price.toString());
     formData.append('image', image);

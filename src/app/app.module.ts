@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './structure/footer/footer.component';
 import { NavbarComponent } from './structure/navbar/navbar.component';
 import { MainComponent } from './structure/main/main.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -16,9 +21,13 @@ import { MainComponent } from './structure/main/main.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ToastModule
+
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
