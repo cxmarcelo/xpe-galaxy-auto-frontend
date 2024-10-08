@@ -1,0 +1,47 @@
+<div class="container-fluid">
+
+    <div class="row m-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn app-primary-button mx-2" (click)="createCar()">
+                        Adicionar Carro
+                    </button>
+                    <button class="btn app-primary-button mx-2" (click)="show()">Exportar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mx-5">
+        <div class="col-12">
+            <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+                [totalRecords]="totalRecords" [rowsPerPageOptions]="[12, 24, 36]" />
+        </div>
+
+        <div class="col-12 col-md-4 col-xl-3 my-2" *ngFor="let car of carList;">
+            <div class="card">
+                <div class="img-container py-3">
+                    <img [src]="car.imageUrl" alt="Car Image" class="card-img-top img-fluid" alt="Imagem do Card">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{car.name}} - {{car.brand}}</h5>
+                    <p class="card-text">
+                        {{car.description}}
+                    </p>
+
+                    <p-tag [value]="formatStatus(car.status)" [severity]="getStatusClass(car.status)" [rounded]="true" />
+
+                    <p class="card-text text-center fs-4">R${{car.price}}</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button class="btn app-primary-outline-button" (click)="editCar(car)">Editar</button>
+                        <button class="btn app-primary-button">Criar Venda</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<app-car-edit-dialog [(dialogOpened)]="carEditDialogOpened" [car]="carEditDialogCar" (saveEvent)="searchCars()">
+</app-car-edit-dialog>

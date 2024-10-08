@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+:root {
+    --app-primary-color: #8B5CF6;
+    --app-primary-hover-color: #6140ac;
+    --app-primary-active-color: #6B3AC4;
+    --app-primary-outline-color: #8B5CF6;
+}
+
+.app-primary-button {
+    background-color: var(--app-primary-color);
+    border-color: var(--app-primary-color);
+    color: #fff;
+
+    &:hover {
+        background-color: var(--app-primary-hover-color);
+        border-color: var(--app-primary-hover-color);
+        color: white;
+    }
+
+    &:active,
+    &:focus {
+        background-color: var(--app-primary-active-color);
+        border-color: var(--app-primary-active-color);
+    }
+
+    &:disabled {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+}
+
+.app-primary-outline-button {
+    background-color: transparent;
+    border-color: var(--app-primary-outline-color);
+    color: var(--app-primary-outline-color);
+
+    &:hover {
+        background-color: var(--app-primary-outline-color);
+        color: #fff;
+    }
+
+    &:active,
+    &:focus {
+        background-color: var(--app-primary-active-color);
+        border-color: var(--app-primary-active-color);
+        color: #fff;
+    }
+
+    &:disabled {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+}

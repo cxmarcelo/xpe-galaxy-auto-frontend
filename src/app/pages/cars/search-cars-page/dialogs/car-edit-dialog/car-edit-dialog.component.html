@@ -1,0 +1,73 @@
+<p-dialog header="Header" [(visible)]="dialogOpened" [style]="{ width: '100%', 'max-width': '650px' }"
+    (onHide)="onHide()">
+    <ng-template pTemplate="header">
+        <div class="font-bold white-space-nowrap">
+            {{getTitle()}}
+        </div>
+    </ng-template>
+    <div>
+        <div class="container-fluid">
+
+            <div class="row">
+                <p-fileUpload *ngIf="car?.id == null" name="Upload Image" (onSelect)="onUpload($event)"
+                    [multiple]="false" accept="image/*" maxFileSize="1000000">
+                    <ng-template pTemplate="content" *ngIf="image != null">
+                        {{ image.name }} - {{ image.size }} bytes
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+
+            <div class="row ">
+
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-floatLabel>
+                        <input pInputText [(ngModel)]="editCar.name" id="name" />
+                        <label for="name">Nome</label>
+                    </p-floatLabel>
+                </div>
+
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-floatLabel>
+                        <input pInputText [(ngModel)]="editCar.brand" id="brand" />
+                        <label for="brand">Marca</label>
+                    </p-floatLabel>
+                </div>
+
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-floatLabel>
+                        <input pInputText [(ngModel)]="editCar.plate" id="plate" />
+                        <label for="plate">Placa</label>
+                    </p-floatLabel>
+                </div>
+
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-floatLabel>
+                        <input pInputText [(ngModel)]="editCar.description" id="description" />
+                        <label for="description">Descrição</label>
+                    </p-floatLabel>
+                </div>
+
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-floatLabel>
+                        <input pInputText [(ngModel)]="editCar.price" id="price" />
+                        <label for="price">Preço</label>
+                    </p-floatLabel>
+                </div>
+
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-dropdown [options]="carStatusEnumList" [(ngModel)]="editCar.status" optionLabel="name"
+                        optionValue="code" placeholder="Status" appendTo="body" />
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="d-flex justify-content-center gap-3">
+            <button class="btn app-primary-outline-button">Editar</button>
+            <button class="btn app-primary-button" (click)="saveOrUpdate()">Salvar</button>
+        </div>
+    </ng-template>
+</p-dialog>
