@@ -1,11 +1,16 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
 
 :root {
     --app-primary-color: #8B5CF6;
     --app-primary-hover-color: #6140ac;
     --app-primary-active-color: #6B3AC4;
     --app-primary-outline-color: #8B5CF6;
+}
+
+ul {
+    padding: 0px !important;
 }
 
 .app-primary-button {

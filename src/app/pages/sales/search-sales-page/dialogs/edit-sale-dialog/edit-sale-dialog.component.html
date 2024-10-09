@@ -1,0 +1,62 @@
+<p-dialog header="Header" [(visible)]="dialogOpened" [style]="{ width: '100%', 'max-width': '650px' }"
+    (onHide)="onHide()">
+    <ng-template pTemplate="header">
+        <div class="font-bold white-space-nowrap">
+            Criar Venda
+        </div>
+    </ng-template>
+    <div>
+        <div class="container-fluid">
+
+            <div *ngIf="sale != null" class="row">
+                <div class="col-12 d-flex justify-content-center">
+
+                    <div class="card">
+                        <div class="img-container py-3">
+                            <img [src]="sale!.car!.imageUrl" alt="Car Image" class="card-img-top img-fluid"
+                                alt="Imagem do Card">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{sale.car.name}} - {{sale.car.brand}} - {{sale.car.plate}} -R${{sale.car.price}}
+                            </h5>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-floatLabel>
+                        <input pInputText [(ngModel)]="saleUpdate.clientName" id="clientName" />
+                        <label for="clientName">Nome do Cliente</label>
+                    </p-floatLabel>
+                </div>
+
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-floatLabel>
+                        <input pInputText [(ngModel)]="saleUpdate.clientCpfOrCnpj" id="clientCpfOrCnpj" />
+                        <label for="clientCpfOrCnpj">Cpf ou Cnpj</label>
+                    </p-floatLabel>
+                </div>
+
+                <div class="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <p-floatLabel>
+                        <input pInputText type="number" [(ngModel)]="saleUpdate.commission" id="commission" />
+                        <label for="commission">Comissão</label>
+                    </p-floatLabel>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="d-flex justify-content-center gap-3">
+            <button class="btn app-primary-outline-button" (click)="close()">Cancelar</button>
+            <button class="btn app-primary-button" (click)="updateSale()">Atualizar</button>
+        </div>
+    </ng-template>
+</p-dialog>

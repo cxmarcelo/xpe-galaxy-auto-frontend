@@ -1,0 +1,56 @@
+<div class="container-fluid">
+
+    <div class="row my-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn app-primary-button mx-2">
+                        Importar
+                    </button>
+                    <button class="btn app-primary-button mx-2">Exportar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <p-table [value]="sales" [tableStyle]="{'min-width': '50rem'}" [columns]="cols"
+            styleClass="p-datatable-striped">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th style="width: 12rem;">Ações</th>
+                    <th *ngFor="let col of columns">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-sale let-columns="columns">
+                <tr>
+                    <td>
+                        <div *ngIf="isSalePendent(sale)" class="d-flex justify-content-between">
+                            <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (click)="editSale(sale)" />
+                            <p-button icon="pi pi-check" [rounded]="true" [text]="true" severity="success"
+                                (click)="openApproveSaleConfirmation(sale)" />
+                            <p-button icon="pi pi-times" [rounded]="true" [text]="true" severity="danger"
+                                (click)="openRejectSaleConfirmation(sale)" />
+                        </div>
+                        <div *ngIf="!isSalePendent(sale)">
+                            -
+                        </div>
+                    </td>
+                    <ng-container *ngFor="let col of columns">
+                        <td *ngIf="col.field != 'status'">
+                            {{formatField(sale, col)}}
+                        </td>
+                        <td *ngIf="col.field == 'status'">
+                            <p-tag [value]="formatSaleStatus(sale)" [severity]="getSeverity(sale.status)" />
+                        </td>
+                    </ng-container>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<app-edit-sale-dialog [(dialogOpened)]="editSaleDialogOpened" [(sale)]="editSaleDialogSale" (saveEvent)="searchSales()">
+</app-edit-sale-dialog>
+<p-confirmDialog />

@@ -3,6 +3,8 @@ import { Car } from '../../../models/dto/car';
 import { CarStatusEnum } from '../../../models/enums/car-status-enum';
 import { CarService } from '../../../services/car.service';
 import { MessageService } from 'primeng/api';
+import { Sale } from '../../../models/dto/sale';
+import { PageEvent } from '../../../models/internal/page-event';
 
 @Component({
   selector: 'app-search-cars-page',
@@ -18,8 +20,15 @@ export class SearchCarsPageComponent implements OnInit {
 
   carList: Car[] = [];
 
+  //DIALOGS
   carEditDialogOpened: boolean = false;
   carEditDialogCar: Car | null = null;
+
+
+  createSaleDialogOpened: boolean = false;
+  createSaleDialogCar: Car | null = null;
+  //END DIALOGS
+
 
   constructor(
     private carService: CarService,
@@ -72,6 +81,10 @@ export class SearchCarsPageComponent implements OnInit {
     this.carEditDialogOpened = true;
   }
 
+  public createSale(car: Car) {
+    this.createSaleDialogOpened = true;
+    this.createSaleDialogCar = car;
+  }
 
   onPageChange(event?: PageEvent) {
     console.log("ON PAGE");
@@ -112,11 +125,8 @@ export class SearchCarsPageComponent implements OnInit {
     return "-";
   }
 
-}
+  public redirectDialog(sale: Sale) {
+    console.log("Saved")
+  }
 
-interface PageEvent {
-  first?: number;
-  rows?: number;
-  page?: number;
-  pageCount?: number;
 }
