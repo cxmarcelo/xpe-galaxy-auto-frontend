@@ -16,6 +16,7 @@ export class CarEditDialogComponent implements OnInit, OnChanges {
   @Output() dialogOpenedChange = new EventEmitter<boolean>();
 
   @Input() car: Car | null = null;
+  @Output() carChange = new EventEmitter<Car | null>();
 
   editCar!: CarCreateUpdate;
 
@@ -24,6 +25,7 @@ export class CarEditDialogComponent implements OnInit, OnChanges {
   carStatusEnumList: any[] = [];
 
   @Output() saveEvent = new EventEmitter<void>();
+
 
 
   constructor(
@@ -121,10 +123,15 @@ export class CarEditDialogComponent implements OnInit, OnChanges {
     }
   }
 
+  public close() {
+    this.dialogOpened = false;
+  }
+
   public onHide() {
     this.car = null;
     this.dialogOpened = false;
     this.dialogOpenedChange.emit(this.dialogOpened);
+    this.carChange.emit(this.car);
   }
 
 

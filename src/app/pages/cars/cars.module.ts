@@ -16,11 +16,13 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { PaginatorModule } from 'primeng/paginator';
 import { TagModule } from 'primeng/tag';
+import { CreateSaleDialogComponent } from './search-cars-page/dialogs/create-sale-dialog/create-sale-dialog.component';
 
 @NgModule({
   declarations: [
     SearchCarsPageComponent,
-    CarEditDialogComponent
+    CarEditDialogComponent,
+    CreateSaleDialogComponent
   ],
   imports: [
     CommonModule,
