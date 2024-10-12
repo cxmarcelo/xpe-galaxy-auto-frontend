@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <button class="btn app-primary-button mx-2">
+                    <button class="btn app-primary-button mx-2" (click)="openUploadDialog()">
                         Importar
                     </button>
                     <button class="btn app-primary-button mx-2">Exportar</button>
@@ -15,7 +15,7 @@
 
     <div class="row my-5">
         <p-table [value]="sales" [tableStyle]="{'min-width': '50rem'}" [columns]="cols"
-            styleClass="p-datatable-striped">
+            styleClass="p-datatable-striped table-primary">
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th style="width: 12rem;">Ações</th>
@@ -54,3 +54,6 @@
 <app-edit-sale-dialog [(dialogOpened)]="editSaleDialogOpened" [(sale)]="editSaleDialogSale" (saveEvent)="searchSales()">
 </app-edit-sale-dialog>
 <p-confirmDialog />
+<app-upload-dialog [(dialogOpened)]="uploadCommissionDialogOpened" [uploadService]="uploadServiceDialog"
+    (uploadEvent)="searchSales()">
+</app-upload-dialog>

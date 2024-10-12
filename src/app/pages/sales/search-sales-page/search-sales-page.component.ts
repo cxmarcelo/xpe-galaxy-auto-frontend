@@ -5,6 +5,8 @@ import { Sale } from '../../../models/dto/sale';
 import { ObjectUtilsService } from '../../../services/object-utils.service';
 import { SaleStatusEnum } from '../../../models/enums/sale-status-enum';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Column } from '../../../models/internal/column';
+import { UploadServiceEnum } from '../../../models/enums/upload-service-enum';
 
 @Component({
   selector: 'app-search-sales-page',
@@ -25,7 +27,8 @@ export class SearchSalesPageComponent implements OnInit {
   editSaleDialogOpened: boolean = false;
   editSaleDialogSale: Sale | null = null;
 
-  saleToApproveOrReject?: Sale;
+  uploadCommissionDialogOpened = false;
+  uploadServiceDialog: UploadServiceEnum = UploadServiceEnum.SALE_COMMISSION_UPDATE;
   //end dialogs
 
   constructor(
@@ -87,8 +90,6 @@ export class SearchSalesPageComponent implements OnInit {
   }
 
   public openApproveSaleConfirmation(sale: Sale) {
-    this.saleToApproveOrReject = sale;
-
     this.confirmationService.confirm({
       message: `Deseja aprovar a venda ${sale.car.name} - ${sale.car.brand} - ${sale.car.plate} - ${'R$' + sale.car.price}`,
       header: 'Confirmação Aprovar Venda',
@@ -106,8 +107,6 @@ export class SearchSalesPageComponent implements OnInit {
   }
 
   public openRejectSaleConfirmation(sale: Sale) {
-    this.saleToApproveOrReject = sale;
-
     this.confirmationService.confirm({
       message: `Deseja rejeitar a venda ${sale.car.name} - ${sale.car.brand} - ${sale.car.plate} - ${'R$' + sale.car.price}`,
       header: 'Confirmação Rejeitar Venda',
@@ -186,9 +185,8 @@ export class SearchSalesPageComponent implements OnInit {
     return sale.status == SaleStatusEnum.PENDENT;
   }
 
-}
+  public openUploadDialog() {
+    this.uploadCommissionDialogOpened = true;
+  }
 
-interface Column {
-  field: string;
-  header: string;
 }

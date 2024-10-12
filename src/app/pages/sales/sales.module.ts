@@ -13,12 +13,15 @@ import { DialogModule } from 'primeng/dialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
+import { SearchCommissionsPageComponent } from './search-commissions-page/search-commissions-page.component';
+import { DialogsModule } from '../../components/dialogs/dialogs.module';
 
 
 @NgModule({
   declarations: [
     SearchSalesPageComponent,
-    EditSaleDialogComponent
+    EditSaleDialogComponent,
+    SearchCommissionsPageComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     InputTextModule,
     TagModule,
     TableModule,
+    DialogsModule
 
   ]
 })
