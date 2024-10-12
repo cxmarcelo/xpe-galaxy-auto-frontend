@@ -1,0 +1,63 @@
+<p-dialog header="Header" [(visible)]="dialogOpened" [style]="{ width: '100%', 'max-width': '650px' }"
+    (onHide)="onHide()">
+    <ng-template pTemplate="header">
+        <div class="font-bold white-space-nowrap">
+            {{getTitle()}}
+        </div>
+    </ng-template>
+    <div>
+        <div class="container-fluid">
+
+            <div class="row">
+                <p-fileUpload name="Upload File" (onSelect)="onUpload($event)" [multiple]="false" accept=""
+                    maxFileSize="1000000">
+                    <ng-template pTemplate="content" *ngIf="file != null">
+                        {{ file.name }} - {{ file.size }} bytes
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+
+            <div class="row mt-3 dialog-table" *ngIf="errorList.length > 0">
+                <p-table #uploadTable [value]="errorList"
+                    styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" [scrollable]="true"
+                    scrollHeight="flex">
+                    <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                            <col style="width: 10%;">
+                            <col style="width: 20%;">
+                            <col style="width: 70%;">
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th>Linha</th>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-error>
+                        <tr>
+                            <td style="text-align: center;">
+                                {{error.id}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{error.code}}
+                            </td>
+                            <td>
+                                {{error.description}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+        </div>
+
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="d-flex justify-content-center gap-3">
+            <button class="btn app-primary-outline-button" (click)="close()">Cancelar</button>
+            <button class="btn app-primary-button" (click)="uploadFile()">Salvar</button>
+        </div>
+    </ng-template>
+</p-dialog>

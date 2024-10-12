@@ -4,13 +4,14 @@ import { CarStatusEnum } from '../../../../../models/enums/car-status-enum';
 import { CarCreateUpdate } from '../../../../../models/dto/car-create-update';
 import { CarService } from '../../../../../services/car.service';
 import { MessageService } from 'primeng/api';
+import { FormatErrorUtilsService } from '../../../../../services/format-error-utils.service';
 
 @Component({
   selector: 'app-car-edit-dialog',
   templateUrl: './car-edit-dialog.component.html',
   styleUrl: './car-edit-dialog.component.scss'
 })
-export class CarEditDialogComponent implements OnInit, OnChanges {
+export class CarEditDialogComponent implements OnInit {
 
   @Input() dialogOpened: boolean = false;
   @Output() dialogOpenedChange = new EventEmitter<boolean>();
@@ -26,11 +27,11 @@ export class CarEditDialogComponent implements OnInit, OnChanges {
 
   @Output() saveEvent = new EventEmitter<void>();
 
-
-
   constructor(
     private carService: CarService,
-    private messageService: MessageService) {
+    private formatErrorUtilsService: FormatErrorUtilsService,
+    private messageService: MessageService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -40,16 +41,12 @@ export class CarEditDialogComponent implements OnInit, OnChanges {
       { name: 'Desabilitado', code: CarStatusEnum.UNAVAILABLE }
     ];
 
+    this.createNewCarObject();
+
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes["car"]) {
-      if (this.car == null) {
-        this.createNewCarObject();
-      } else {
-        this.editCar = this.car;
-      }
-    }
+  public onShow() {
+    this.createNewCarObject();
   }
 
   public saveOrUpdate() {
@@ -67,23 +64,19 @@ export class CarEditDialogComponent implements OnInit, OnChanges {
 
     this.carService.createCar(this.editCar, this.image!).subscribe({
       next: resp => {
-        console.log("Carro Salvo");
-        console.log(resp);
         this.messageService.add({ severity: 'success', summary: 'Successo', detail: "Carro criado com sucesso." });
         this.dialogOpened = false;
         this.saveEvent.emit();
       },
-      error: err => {
-        this.messageService.add({ severity: 'error', summary: 'Erro', detail: err.message });
-        console.log("Carro Erro");
-        console.log(err);
+      error: httpError => {
+        let error = httpError.error;
+        this.formatErrorUtilsService.printErrors(error);
       }
     })
   }
 
   isValidateCar(): boolean {
     if (this.car?.id == null && this.image == null) {
-      console.log("Dei erro aqui no null")
       return true;
     }
 
@@ -129,6 +122,7 @@ export class CarEditDialogComponent implements OnInit, OnChanges {
 
   public onHide() {
     this.car = null;
+    this.image = undefined;
     this.dialogOpened = false;
     this.dialogOpenedChange.emit(this.dialogOpened);
     this.carChange.emit(this.car);
@@ -151,10 +145,4 @@ export class CarEditDialogComponent implements OnInit, OnChanges {
     console.log(this.image)
   }
 
-}
-
-
-interface UploadEvent {
-  originalEvent: Event;
-  files: File[];
 }
