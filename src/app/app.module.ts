@@ -7,12 +7,13 @@ import { FooterComponent } from './structure/footer/footer.component';
 import { NavbarComponent } from './structure/navbar/navbar.component';
 import { MainComponent } from './structure/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DatePipe, DecimalPipe, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt'
+import { JwtTokenInterceptor } from './auth/jwt-token.interceptor';
 
 registerLocaleData(localePt)
 
@@ -36,7 +37,8 @@ registerLocaleData(localePt)
     ConfirmationService,
     DatePipe,
     DecimalPipe,
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
