@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './structure/main/main.component';
+import { jwtAuthGuard } from './auth/jwt-auth.guard';
 
 const routes: Routes = [
+  //TODO CAN ACTIVATE
   {
-    path: '', component: MainComponent,
+    path: '', component: MainComponent, canActivate: [jwtAuthGuard],
     children: [
       { path: '', loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule), },
       { path: 'cars', loadChildren: () => import('./pages/cars/cars.module').then((m) => m.CarsModule), },
       { path: 'sales', loadChildren: () => import('./pages/sales/sales.module').then((m) => m.SalesModule), },
-
-      { path: '**', redirectTo: '/' },
     ]
   },
-  //{ path: 'module8', loadChildren: () => import('./pages/module8/module8.module').then((m) => m.Module8Module), },
+  { path: 'login', loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule), },
   { path: '**', redirectTo: '/' },
 ];
 
