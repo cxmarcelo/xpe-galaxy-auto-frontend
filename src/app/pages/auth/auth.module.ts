@@ -9,6 +9,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule,
     FloatLabelModule,
     InputTextModule,
+    ToastModule,
 
   ]
 })

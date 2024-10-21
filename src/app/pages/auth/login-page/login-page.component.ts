@@ -39,7 +39,6 @@ export class LoginPageComponent {
             this.messageService.add({ severity: 'error', summary: 'Erro', detail: loginError.msg });
           }
         } else {
-          console.error(httpError);
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: "Falha para realizar o login. Consulte um administrador." });
         }
       }
