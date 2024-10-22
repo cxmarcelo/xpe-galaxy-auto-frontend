@@ -5,13 +5,14 @@ import { Page } from '../models/dto/page';
 import { Sale } from '../models/dto/sale';
 import { SaleCreate } from '../models/dto/sale-create';
 import { SaleUpdate } from '../models/dto/sale-update';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaleService {
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = environment.API_URL;
 
   constructor(private http: HttpClient) { }
 
