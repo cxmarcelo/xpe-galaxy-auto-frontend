@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 export class AuthService {
 
   private TOKEN_KEY = "APP_JWT_TOKEN";
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = environment.API_URL;
 
   constructor(private http: HttpClient) {
   }

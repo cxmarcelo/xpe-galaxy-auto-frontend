@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Page } from '../models/dto/page';
 import { Sale } from '../models/dto/sale';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SaleCommissionService {
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = environment.API_URL;
 
   constructor(private http: HttpClient) { }
 

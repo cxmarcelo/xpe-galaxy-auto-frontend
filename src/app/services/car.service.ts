@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { CarCreateUpdate } from '../models/dto/car-create-update';
 import { Car } from '../models/dto/car';
 import { Page } from '../models/dto/page';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
 
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = environment.API_URL;
 
   constructor(private http: HttpClient) { }
 
